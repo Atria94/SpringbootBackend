@@ -38,7 +38,7 @@ public class Ejercicio {
         int resultado = Integer.parseInt(num1) + Integer.parseInt(num2);
         //return "La suma de "+num1+" y el numero "+num2+" es "+resultado;
         Object params[] = {num1, num2, resultado};
-        return MessageFormat.format("La suma de {0} y {1} es {2}")
+        return MessageFormat.format("La suma de {0} y {1} es {2}", params);
     }
 
 }
