@@ -20,7 +20,7 @@ public class WebController {
 
     @RequestMapping("/rickandmorty/listview")
     public String getRickAndMortyListView(Model model){
-        ArrayList<Person> persons= rickAndMortyService.getCharactersFromAPI();
+        ArrayList<Person> persons= rickAndMortyService.getAllCharactersFromAPI();
         model.addAttribute("persons",persons);
         return "rickandmorty";
     }
