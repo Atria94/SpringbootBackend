@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
+import com.example.demo.models.Joke;
 import com.example.demo.models.Person;
+import com.example.demo.services.JokeService;
 import com.example.demo.services.RickAndMortyService;
 import com.example.demo.utils.Utils;
 
@@ -22,6 +25,9 @@ public class Ejercicio {
 
     @Autowired
     RickAndMortyService rickAndMortyService;
+
+    @Autowired
+    JokeService jokeService;
 
     //http://localhost:8080/
     @GetMapping("/")
@@ -99,5 +105,29 @@ public class Ejercicio {
            web+="<img src='"+person.image+"'/>";
        }
        return web;
+    }
+
+    //Listar chistes
+    @GetMapping("/listarchistes")
+    public String jokeList(){
+        ArrayList<Joke> jokes = jokeService.getAllJokes();
+        String listado = "";
+        for(Joke joke: jokes){
+            listado+= joke.getText();
+            listado += "<br/>";
+        }
+        return listado;
+    }
+
+    //Insertar un nuevo chiste
+    @PostMapping("/insertarchiste")
+    public String addJoke(@RequestParam Map<String, String> body){
+        String jokeText = body.get("text");
+        jokeText.replaceAll("<", "");
+        jokeText.replaceAll(">", "");
+        Joke joke=new Joke();
+        joke.setText(jokeText);
+        jokeService.saveJoke(joke);
+        return "Chiste creado correctamente";
     }
 }
