@@ -25,8 +25,8 @@ public class WebController {
         return "rickandmorty";
     }
 
-    @RequestMapping("formulariochiste")
+    @RequestMapping("/formulariochiste")
     public String getFormularioChiste(Model model) {
-        return "formularioInsercionChiste";
+        return "formulariosInsercionChiste";
     }
 }
